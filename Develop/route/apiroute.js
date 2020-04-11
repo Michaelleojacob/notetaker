@@ -41,13 +41,15 @@ module.exports = function(app){
 app.delete('/api/notes/:id', function (req, res){
     fs.readFile('./db/db.json', "utf-8", (err, notesReponse) => {
         let allNotes = JSON.parse(notesReponse);
-        const noteIndex = allNotes.findIndex(allNotes => allNotes.id === req.params.id);
+        const noteIndex = allNotes.findIndex(allNotes => allNotes.id === parseInt(req.params.id));
     if (noteIndex === -1 ){
         return res.sendStatus(404);
     }
     allNotes.splice(noteIndex, 1);
-    return res.sendStatus(200);
-    
+    fs.writeFile("./db/db.json", JSON.stringify(allNotes), err => {
+        res.json(allNotes);
+    } ) 
 })
-});
+  
+})
 }
