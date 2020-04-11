@@ -4,7 +4,7 @@ const path = require("path");
 module.exports = function(app) {
   //HTML GET Routes
     app.get("/", function(req, res) {
-      res.json(path.join(__dirname, "..public/index.html"));
+      res.json(path.join(__dirname, "../public/index.html"));
     });
   app.get('/notes', function(req, res) {
       // "/notes" responds with the notes.html file
